@@ -118,15 +118,15 @@ function getFederalAgencyDatasets(thisagencyid)
                 $('#'+agencyid+'-'+unique+'-distribution-list').append(html);                    
                 });                 
                 
-            download_url = val['download_url'];   
-            if(download_url.length < 5)
+            $download_url = val['download_url'];   
+            if($download_url.length < 5)
                 {
                 id = agencyid + '-' + unique + '-download-url';
                 alert(id);
                 document.getElementById(id).innerHTML = '';
                 }
-            accessURL = val['accessURL'];       
-            if(accessURL.length < 5)
+            $accessURL = val['accessURL'];       
+            if($accessURL.length < 5)
                 {
                 id = agencyid + '-' + unique + '-access-url';
                 alert(id);
