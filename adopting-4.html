@@ -41,8 +41,7 @@ title: Adopt Dataset
         
         $.getJSON("http://api.publicprivatesector.org/adopt/?unique="+$Unique+"&agencyid="+$agencyid+"&account="+$UserLogin,function(data) {
                 
-               // var response = JSON.parse(data);
-                alert(data);
+                alert(dodump(apiresponse));
                 
                 //redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
                 //setTimeout(callback(redirectURL), 5000);                 
