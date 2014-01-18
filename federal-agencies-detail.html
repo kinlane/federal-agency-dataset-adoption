@@ -47,13 +47,13 @@ getFederAgencyDetails(agencyid);
     <tr>
         <td>
             <strong>{{title}}</strong>
-            <div style="display:none; width: 100%; margin-top: 5px;" id="{{unique}}-description">{{description}}</div>
-            <div style="display:none; width: 100%; margin-top: 5px;" id="{{unique}}-distributions"><ul id="{{unique}}-distribution-list"></div>
+            <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-description">{{description}}</div>
+            <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-distributions"><ul id="{{unique}}-distribution-list"></div>
         </td>
-        <td><a href="#" onclick="showDIV('{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
-        <td><a href="#" onclick="showDIV('{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
-        <td id="{{unique}}-download-url"><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)">L</span></a></td>
-        <td id="{{unique}}-access-url"><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)">A</span></a></td>
+        <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
+        <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
+        <td id="{{agency_id}}-{{unique}}-download-url"><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)">L</span></a></td>
+        <td id="{{agency_id}}-{{unique}}-access-url"><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)">A</span></a></td>
     </tr>    
 </script>
 <script id="agencydatadistributiontemplate" type="text/template">
@@ -111,14 +111,14 @@ function getFederalAgencyDatasets(thisagencyid)
             download_url = val['download_url'];   
             if(download_url.length < 5)
                 {
-                id = unique + '-download-url';
+                id = agencyid + '-' + unique + '-download-url';
                 alert(id);
                 document.getElementById(id).innerHTML = '';
                 }
             accessURL = val['accessURL'];       
             if(accessURL.length < 5)
                 {
-                id = unique + '-access-url';
+                id = agencyid + '-' + unique + '-access-url';
                 alert(id);
                 document.getElementById(id).innerHTML = '';
                 }
@@ -130,7 +130,7 @@ function getFederalAgencyDatasets(thisagencyid)
              $.each(distribution, function(key2, val2) {  
                 var template = $('#agencydatadistributiontemplate').html();
                 var html = Mustache.to_html(template, val2);
-                $('#'+unique+'-distribution-list').append(html);                    
+                $('#'+agencyid+'-'+unique+'-distribution-list').append(html);                    
                 });                 
                 
             });                                    
