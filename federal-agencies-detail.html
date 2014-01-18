@@ -53,8 +53,8 @@ getFederAgencyDetails(agencyid);
         </td>
         <td><a href="#" onclick="showDIV('{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
         <td><a href="#" onclick="showDIV('{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
-        <td><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)">L</span></a></td>
-        <td><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)">A</span></a></td>
+        <td><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)" id="{{unique}}-download-url">L</span></a></td>
+        <td><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)" id="{{unique}}-access-url">A</span></a></td>
     </tr>    
     
 </script>
@@ -108,8 +108,19 @@ function getFederalAgencyDatasets(thisagencyid)
          $.each(data, function(key, val) {  
              
             unique = val['unique']; 
-            distribution = val['distribution'];    
-             
+            distribution = val['distribution'];
+            
+            download_url = val['download_url'];   
+            if(download_url.length < 5)
+                {
+                document.getElementById(unique + '-download-url').style.display = 'none';
+                }
+            accessURL = val['accessURL'];       
+            if(accessURL.length < 5)
+                {
+                document.getElementById(unique + '-access-url').style.display = 'none';
+                }
+                             
             var template = $('#agencydatatemplate').html();
             var html = Mustache.to_html(template, val);
             $('#agencydata').append(html); 
