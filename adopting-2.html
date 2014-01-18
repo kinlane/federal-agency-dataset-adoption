@@ -25,7 +25,7 @@ title: Adopt Dataset
     $oAuth_Token = getUrlVar('oAuth_Token');  
     
     $.getJSON($url, function(data) {        
-         $.each(data['agencies'], function(key, val) {           
+         $.each(data, function(key, val) {           
             
             $thisunique = val['unique']; 
 
