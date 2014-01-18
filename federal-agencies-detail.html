@@ -62,19 +62,10 @@ function getFederalAgencyDatasets(thisagencyid)
     {
     agencydatajsonurl = '/data/' + thisagencyid + '.json';    
     $.getJSON(agencydatajsonurl, function(data) {
-         $.each(data, function(key, val) {
-            
-            agency_id = val['agency_id']; 
-
-            if(thisagencyid == agency_id)
-                {
-                    
-                var template = $('#agencydatatemplate').html();
-                var html = Mustache.to_html(template, val);
-                $('#agencydata').append(html);     
-               
-                
-                }
+         $.each(data, function(key, val) {  
+            var template = $('#agencydatatemplate').html();
+            var html = Mustache.to_html(template, val);
+            $('#agencydata').append(html);     
             });                                    
         });
     }  
