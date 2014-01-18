@@ -110,7 +110,7 @@ function getFederalAgencyDatasets(thisagencyid)
                 
              $.each(distribution, function(key2, val2) {  
                 var template = $('#agencydatadistributiontemplate').html();
-                var html = Mustache.to_html(template, val);
+                var html = Mustache.to_html(template, val2);
                 $('#'+unique+'-distribution-list').append(html);                    
                 });                 
                 
