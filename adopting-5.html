@@ -1,0 +1,68 @@
+---
+layout: page
+title: Adopt Dataset
+---
+
+
+  <h1>Adopting...</h1>
+  
+  <p align="center"><img src="https://s3.amazonaws.com/kinlane-productions/loading.gif" id="loading" width="150" /></p>
+  
+  <script type="text/javascript">  
+  
+    function callback(url){
+        return function(){
+            location.href=url;
+        }
+    }               
+  
+    $Unique = getUrlVar('unique'); 
+    $UserLogin = getUrlVar('account');     
+    $agencyid = getUrlVar('agencyid');     
+    $oAuth_Token = getUrlVar('oAuth_Token');  
+        
+    $AgencyName = "";
+    $.getJSON('data/federal-agencies.json', function(data) {        
+         $.each(data['agencies'], function(key, val) {            
+            $thisagencyid = val['agency_id']; 
+            if($thisagencyid == $agencyid)
+                {                    
+                $AgencyName = val['name']; 
+                }
+            });                                    
+        });    
+    
+    $AgencyDatasetTitle = "";   
+    $url = "/data/" + $agencyid + ".json";
+    $.getJSON($url, function(data) {        
+         $.each(data, function(key, val) {            
+            $thisunique = val['unique']; 
+            if($thisunique == $Unique)
+                {                    
+                $AgencyDatasetTitle = val['title'];                
+                }
+            });                                    
+        });
+    
+    var github = new Github({
+        token: $oAuth_Token,
+        auth: "oauth"
+            });
+            
+    var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+    repo.read('master','README.md',function(err, data){    
+        
+        $READMEPage = data;        
+        
+        $READMEPage = $READMEPage.replace([title],$AgencyDatasetTitle);
+        $READMEPage = $READMEPage.replace([agency name],$AgencyName);
+        
+        repo2.write('master','README.md', $READMEPage, 'Updating the README.', function(err) {
+      
+            //redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
+            //setTimeout(callback(redirectURL), 5000);              
+        
+          });
+       });             
+     
+  </script> 
