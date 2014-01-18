@@ -96,6 +96,11 @@ function getFederalAgencyDatasets(thisagencyid)
     agencydatajsonurl = '/data/' + thisagencyid + '.json';    
     $.getJSON(agencydatajsonurl, function(data) {
          $.each(data, function(key, val) {  
+             
+            distribution = val['distribution'];  
+             
+            console.log(distribution); 
+             
             var template = $('#agencydatatemplate').html();
             var html = Mustache.to_html(template, val);
             $('#agencydata').append(html);     
