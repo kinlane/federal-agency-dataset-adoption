@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Companies
+title: Federal Agency
 ---
 {% raw  %}
 <script id="agencyTemplate" type="text/template">
@@ -15,14 +15,11 @@ title: Companies
 {% endraw %}
 
 <div>
-    
     <div id="agencyDetail"> </div>
-    
 </div>  
 
 <script type="text/javascript">
-
-function getCompanyDetails(thisagencyid)
+function getFederAgencyDetails(thisagencyid)
     {
     $.getJSON('data/federal-agencies.json', function(data) {
          $.each(data['agencies'], function(key, val) {
@@ -42,6 +39,44 @@ function getCompanyDetails(thisagencyid)
         });
     }  
 
-getCompanyDetails(getUrlVar('agency_id'));
+var agencyid = getUrlVar('agency_id');
+getFederAgencyDetails(agencyid);
+</script>
 
+{% raw  %}
+<script id="agencydatatemplate" type="text/template">
+
+    <tr>
+        <td width="25%">{{name}}</td>
+        <td width="75%">{{description}}</td>
+    </tr>
+    
+</script>
+{% endraw %}
+
+<div>
+    <table id="agencydata"> </table>
+</div>  
+
+<script type="text/javascript">
+function getFederalAgencyDatasets(thisagencyid)
+    {
+    agencydatajsonurl = '/data/' + thisagencyid + '.json';    
+    $.getJSON(agencydatajsonurl, function(data) {
+         $.each(data, function(key, val) {
+            
+            agency_id = val['agency_id']; 
+
+            if(thisagencyid == agency_id)
+                {
+                    
+                var template = $('#agencydatatemplate').html();
+                var html = Mustache.to_html(template, val);
+                $('#agencydata').append(html);     
+               
+                
+                }
+            });                                    
+        });
+    }  
 </script>
