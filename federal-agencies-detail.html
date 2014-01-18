@@ -44,7 +44,6 @@ getFederAgencyDetails(agencyid);
 
 {% raw  %}
 <script id="agencydatatemplate" type="text/template">
-
     <tr>
         <td>
             <strong>{{title}}</strong>
@@ -53,10 +52,9 @@ getFederAgencyDetails(agencyid);
         </td>
         <td><a href="#" onclick="showDIV('{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
         <td><a href="#" onclick="showDIV('{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
-        <td><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)" id="{{unique}}-download-url">L</span></a></td>
-        <td><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)" id="{{unique}}-access-url">A</span></a></td>
+        <td id="{{unique}}-download-url"><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)">L</span></a></td>
+        <td id="{{unique}}-access-url"><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)">A</span></a></td>
     </tr>    
-    
 </script>
 <script id="agencydatadistributiontemplate" type="text/template">
     <li><a href="{{accessURL}}" target="_blank">{{accessURL}}</a></li>
@@ -113,12 +111,12 @@ function getFederalAgencyDatasets(thisagencyid)
             download_url = val['download_url'];   
             if(download_url.length < 5)
                 {
-                document.getElementById(unique + '-download-url').style.display = 'none';
+                document.getElementById(unique + '-download-url').innerHTML = '';
                 }
             accessURL = val['accessURL'];       
             if(accessURL.length < 5)
                 {
-                document.getElementById(unique + '-access-url').style.display = 'none';
+                document.getElementById(unique + '-access-url').innerHTML = '';
                 }
                              
             var template = $('#agencydatatemplate').html();
