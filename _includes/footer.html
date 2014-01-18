@@ -1,0 +1,116 @@
+</div><!-- /.post -->
+
+            </div><!-- /#main -->
+
+            <div id="sidebar">
+                
+                {% if page.title == 'Federal Government' %}
+    
+                {% else %}
+                    <div class="widget widget_recent_entries"> 
+                        <center>      
+                             <p style="font-size: 16px;"><strong>Federal Government</strong></p>
+                            <img src="http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/blog/Building-a-21st-century-platform-to-better-serve-the-american-people-1.png" width="175" />
+                        </center>
+                    </div>
+                {% endif %}                
+                
+                 <div class="widget widget_recent_entries">  
+                     <h3>Winning in the API Economy</h3>
+                     <center>
+                        <table width="250" align="center">
+                        <tbody>
+                            <tr>
+                                <td align="center"><a href="http://bit.ly/1cHBhd5" target="_blank"><img src="https://s3.amazonaws.com/kinlane-productions/api-service-providers/3Scale/ebook-3scale.png" width="200" style="border: 0px solid #000;" /></a></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><strong><a href="http://bit.ly/1cHBhd5" target="_blank">Download as PDF</a></strong></td>
+                            </tr>
+                        </tbody>
+                        </table>                     
+                     </center>
+                 </div>                         
+                
+                 <div class="widget widget_recent_entries">  
+                    <h3>API Evangelist Network</h3>
+                     <p align="center"><a href="http://apievangelist.com/network.html"><img src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/network/API-Evangelist-Network.png" width="215" /></a></p>                   
+                 </div>
+                
+                 <div class="widget widget_recent_entries">  
+                     
+                    <!--- Begin Partners --->
+                    <script id="parterListingTemplate" type="text/template"> 
+                        {% raw  %}  
+                        <a href="{{url}}" target="_blank" title="{{title}}">
+                            <img src="{{logo}}" width="{{width}}" style="padding-bottom: {{paddingbottom}}px;" />
+                        </a>   
+                        {% endraw %}                                                                                                                    
+                    </script>  
+                     
+                    <script type="text/javascript">
+                        function listSponsors()
+                            {
+                            $.getJSON('/data/sponsors.json', function(data) {               
+                                 $.each(data['sponsors'], function(key, val) {                  
+                                    var template = $('#parterListingTemplate').html();
+                                    var html = Mustache.to_html(template, val);
+                                    $('#partnerListingContainer').append(html);
+                                    });         
+                                });             
+                            }    
+                    </script>
+               
+                    <h3>Partner Sites</h3>
+                    <div id="partnerListingContainer" align="center"><br /><br /> </div>
+                    
+                    <script type="text/javascript">
+                        listSponsors();
+                    </script>                    
+                        
+                </div>  
+                <!--- End Partners --->                                              
+                           
+            </div>
+
+        </div><!-- /#main-sidebar-container -->         
+
+    </div><!-- /#content -->
+
+    <div id="footer" class="col-full">
+
+        <div id="copyright" class="col-left">
+            <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a></p>        
+        </div>
+
+        <div id="credit" class="col-right">
+    
+            <p><a href="http://kinlane.com/about/">About</a></p>    
+            <p>|</p>
+            <p><a href="http://theapistack.com">API Stack</a></p>   
+            <p>|</p>
+            <p><a href="http://apievangelist.com">API Evangelist</a></p>        
+            <p>|</p>
+            <p><a href="http://apivoice.com">API Voice</a></p>
+            <p>|</p>
+            <p><a href="http://kinlane.com/contact/">Contact</a></p>                
+        
+        </div>
+
+    </div><!-- /#footer  -->
+
+</div><!-- /#wrapper -->                  
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1119465-51']);
+  _gaq.push(['_setDomainName', 'apievangelist.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

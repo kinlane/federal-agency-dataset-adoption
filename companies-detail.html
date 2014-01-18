@@ -1,0 +1,31 @@
+---
+layout: page
+title: Companies
+---
+{% raw  %}
+<script id="companyDetailTemplate" type="text/template">
+    <h2>{{name}}</h2>
+     <p><img src="{{logo}}" width="250" style="padding: 15px;" align="right" /></a></p>
+    <p>{{details}}</p>                                                                                                
+</script>
+{% endraw %}
+<div>
+    
+    <p><a id="jsonlink" href="data/companies.json" target="_blank"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-json-data-store.png" align="right" width="50" style="padding-top: 10px;" /></a></p>
+    <div id="companyDetail"> </div>
+    <br />
+    <div id="linkicons" align="center" width="50%">
+        <a href="companies.html" target="_blank" title="Website" id="home-icon"><img id="home-icon-img" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="50" style="margin-bottom: 5px; padding:15px;" /></a>
+        <a href="companies.html" target="_blank" title="Blog" id="blog-icon"><img id="blog-icon-img" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-blog-icon.png" width="45" style="padding:15px;margin-bottom: 3px; " /></a>
+        <a href="companies.html" target="_blank" title="Blog RSS" id="blogrss-icon"><img id="blogrss-icon-img" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-rss-icon.png" width="47" style="padding:15px;" /></a>
+        <a href="companies.html" target="_blank" title="Twitter" id="twitter-icon"><img id="twitter-icon-img" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-twitter-icon.png" width="55" style="padding:15px;margin-bottom: 3px; " /></a>
+        <a href="companies.html" target="_blank" title="Githube" id="github-icon"><img id="github-icon-img" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-github-icon.png" width="70" style="padding:15px;" /></a>
+    </div>
+    <br />
+    <p align="center"><a href="companies.html">Return to Companies Page</a></p>
+    
+</div>  
+
+<script>
+getCompanyDetails(getUrlVar('id'));
+</script>

@@ -1,0 +1,59 @@
+---
+layout: post
+title: 'Lack of Transparency Is Healthcare.gov Biggest Bottleneck'
+url: http://kinlane.com/2013/10/06//
+image: http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/blog/healthcare-gov.jpg
+---
+
+<p><p>
+     <img class="c1" src="https://s3.amazonaws.com/kinlane-productions/federal-government/healthcare-gov/healthcare-gov.jpg" alt="" align="right" />
+</p>
+<p>
+     If you pay attention to the news, you have probably heard about the technical trouble with the launch of the Affordable Care Act, 50 state marketplaces and the central <a href="https://www.healthcare.gov">Healthcare.gov</a> site.
+</p>
+<p>
+     People across the country are encountering show-stopping bugs in the sign up process, and if you go to the healthcare.gov site currently, you get a splash page that states, "We have a lot of visitors on the site right now." If you stay on the page it will refresh every few seconds until, eventually you might get a successful registration form.
+</p>
+<p>
+     I worked at it for hours last night was finally able to get into the registration process, only to get errors several steps in, but eventually got through the flow and successfully registered for an account, scrutinizing the code and network activity behind the scenes as I went along.
+</p>
+<p>
+     There are numerous blog posts trying to <a href="http://www.reuters.com/article/2013/10/05/us-usa-healthcare-technology-analysis-idUSBRE99407T20131005">break down what is going wrong with the Healthcare.gov registration process</a>, but ultimately many of them are very superficial, making vague accusations of vendors involved, and the perceived technology at play. I think one of the better one's was <a href="http://talkingpointsmemo.com/cafe/a-programmer-s-perspective-on-healthcare-gov-and-aca-marketplaces">A Programmer's Perspective On Healthcare.gov And ACA Marketplaces</a>, by Paul Smith.
+</p>
+<p>
+     Late last night, the Presidential Innovation Fellows (PIF), led by round one PIF Phillip Ashlock(<a href="https://twitter.com/philipashlock">@philipashlock</a>), set out to try and develop our own opinion about what is happening behind the scenes. Working our way through the registration process, trying to identify potential bottlenecks.
+</p>
+<p>
+     When you look at the flow of calls behind each registration page you see a myriad of calls to JavaScript libraries, internal and external services that support the flow. There definitely could have been more thought put into preparing this architecture for scaling, but a handful of calls really stands out:
+</p>
+<blockquote>
+     https://www.healthcare.gov/marketplace/global/en_US/registration.js<br />
+</blockquote>
+<blockquote>
+     <em>https://www.healthcare.gov/ee-rest/ffe/en_US/MyAccountEIDMUnsecuredIntegration/createLiteEIDMAccount</em>
+</blockquote>
+<p>
+     The second URL pretty clearly refers to the <a href="https://itdashboard.gov/investment/project-summary/1185">Center for Medicare and Medicaid Services(CMS) Enterprise Identity Management (EIDM) platform</a>, which provides new user registration, access management, identity lifecycle management, giving users of the Healthcare Exchange Plan Management can register and get CMS credentials. Where the registration.js appears handles much of the registration process.
+</p>
+<p>
+     <img class="c2" src="https://s3.amazonaws.com/kinlane-productions/federal-government/healthcare-gov/healthcare-reg-network-calls.png" alt="" width="525" />
+</p>
+<p>
+     Philip identified the <em>createLiteEIDMAccount</em> call as the most telling part of the payload and response, and would most likely be the least resilient portion of the architecture, standing out as a potentially severe bottleneck. The CMS EIDM platform is just one potential choke point, and isn't a bleeding edge solution, it is pretty straightforward enterprise architecture that may not have had adequate resources allocated to handle the load. I'm guessing underallocated server and application resources is playing a rampant role across Healthcare.gov operations.
+</p>
+<p>
+     Many of the articles I've read over the last couple days make reference to the front-end of Healthcare.gov in using Jekyll and APIs, and <a title="open-washing" href="http://govfresh.com/2013/10/openwashing-healthcare-gov/">refer to the dangers of open washing</a>, and technological solution-ism. Where this is most likely an under-allocated, classic enterprise piece of the puzzle that can't keep up. I do agree with portions of the open washing arguments, and specifically around showcasing the project as "open", when in reality the front-end is the only open piece, with the backend being a classic, closed architecture and process.
+</p>
+<p>
+     Without transparency into the entire stack of Healthcare.gov and the marketplace rollouts, it is not an open project. I don't care if any part of it is--making it open-washing. The teams in charge of the front-end were very transparent in getting feedback on the front-end implementation and publishing the code to Github for review. It isn't guaranteed, but if the entire backend stack followed the same approach, publishing technology, architectural approaches and load testing numbers throughout a BETA cycle for the project--things might have been different on launch day.
+</p>
+<p>
+     <img class="c2" src="https://s3.amazonaws.com/kinlane-productions/federal-government/healthcare-gov/healthcare-gov-load.png" alt="" width="525" />
+</p>
+<p>
+     Transparency goes a long way into improving not just the technology and architecture, but can shed light on illnesses in the procurement, contracting and other business and political aspects of projects. Many technologists will default to thinking I'm talking about open source, open tools or open APIs, but in reality I'm talking about an open process.
+</p>
+<p>
+     In the end, this story is just opinion and speculation. Without any transparency into exactly what the backend architecture of Healthcare.gov and the marketplaces are, we have no idea of actually what the problem is. I'm just soapboxing my opinion like the authors of every other story published about this problem over the last couple days, making them no more factual than some of my other fictional pieces about this being an <a href="http://alternate.kinlane.com/2013/10/04/my-name-is-frank-and-i-work-at-cqi-cloud-providers/">inside job</a> or a c<a href="http://alternate.kinlane.com/2013/10/06/me-and-my-army-of-enthusiastic-obamacare-registrants/">leverly disguised denial of service attack</a>!
+</p></p>
+
