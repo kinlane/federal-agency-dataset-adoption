@@ -46,17 +46,15 @@ getFederAgencyDetails(agencyid);
 <script id="agencydatatemplate" type="text/template">
 
     <tr>
-        <td>{{title}}</td>
+        <td>
+            {{title}}
+            <div style="display:none; width: 100%; height: 100px; overflow: auto;" id="{{agency_id}}-description">{{description}}</div>
+            <div style="display:none;" id="{{agency_id}}-distributions"></div>
+        </td>
         <td><a href="#" onclick="showDescription('{{agency_id}}-description'); return false;"><span class="label label-primary">D</span</a></td>
         <td><span class="label label-primary">L</span</td>
         <td><span class="label label-primary">A</span</td>
-    </tr>
-    <tr style="display:none;" id="{{agency_id}}-description">
-        <td colspan="4">{{description}}</td>
     </tr>    
-    <tr style="display:none;" id="{{agency_id}}-distributions">
-        <td colspan="4">[put here]</td>
-    </tr>      
     
 </script>
 {% endraw %}
