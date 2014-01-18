@@ -56,13 +56,21 @@ getFederAgencyDetails(agencyid);
 {% endraw %}
 
 <div>
-    <table id="agencydata" class="table table-striped table-bordered"> </table>
+    <table id="agencydata" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>        
+    </table>
 </div>  
 
 <script type="text/javascript">
 function getFederalAgencyDatasets(thisagencyid)
     {
-    alert(thisagencyid);
     agencydatajsonurl = '/data/' + thisagencyid + '.json';    
     $.getJSON(agencydatajsonurl, function(data) {
          $.each(data, function(key, val) {  
