@@ -107,7 +107,17 @@ function getFederalAgencyDatasets(thisagencyid)
              
             unique = val['unique']; 
             distribution = val['distribution'];
-            
+                             
+            var template = $('#agencydatatemplate').html();
+            var html = Mustache.to_html(template, val);
+            $('#agencydata').append(html); 
+                
+             $.each(distribution, function(key2, val2) {  
+                var template = $('#agencydatadistributiontemplate').html();
+                var html = Mustache.to_html(template, val2);
+                $('#'+agencyid+'-'+unique+'-distribution-list').append(html);                    
+                });                 
+                
             download_url = val['download_url'];   
             if(download_url.length < 5)
                 {
@@ -121,17 +131,7 @@ function getFederalAgencyDatasets(thisagencyid)
                 id = agencyid + '-' + unique + '-access-url';
                 alert(id);
                 document.getElementById(id).innerHTML = '';
-                }
-                             
-            var template = $('#agencydatatemplate').html();
-            var html = Mustache.to_html(template, val);
-            $('#agencydata').append(html); 
-                
-             $.each(distribution, function(key2, val2) {  
-                var template = $('#agencydatadistributiontemplate').html();
-                var html = Mustache.to_html(template, val2);
-                $('#'+agencyid+'-'+unique+'-distribution-list').append(html);                    
-                });                 
+                }                
                 
             });                                    
         });
