@@ -1,0 +1,68 @@
+---
+layout: page
+title: Companies
+---
+{% raw  %}
+<script id="agencyTemplate" type="text/template">
+
+    <h2>{{name}}</h2>
+    <p align="center"><img src="{{logo}}" width="250" style="padding: 15px;" /></a></p>
+    <p align="center"><strong>Digital Strategy</strong> (<a href="{{digital_strategy_html}}" target="_blank">HTML</a>) (<a href="{{digital_strategy_json}}" target="_blank">JSON</a>) (<a href="{{digital_strategy_xml}}" target="_blank">XML</a>)</p>
+    <p align="center">
+        <a href="{{url}}" target="_blank" title="{{name}}">{{url}}</a>
+     </p>
+     <br />
+     <div  style="width: 500px; border: 0px solid #000; padding-left: 60px;">
+        <h3>2.1</h3>
+        <ul style="padding-left: 25px;" id="two-{{agency_id}}"></ul>
+        <h3>7.1</h3>
+        <ul style="padding-left: 25px;" id="seven-{{agency_id}}"></ul>
+     </div>        
+</script>
+{% endraw %}
+
+<div>
+    
+    <div id="agencyDetail"> </div>
+    
+</div>  
+
+<script type="text/javascript">
+
+function getCompanyDetails(thisagencyid)
+    {
+    $.getJSON('data/federal-agencies-digital-strategy.json', function(data) {
+         $.each(data['agencies'], function(key, val) {
+            
+            agency_id = val['agency_id']; 
+            //alert(thisagencyid + ' ' + agency_id);
+            if(thisagencyid == agency_id)
+                {
+                    
+                var template = $('#agencyTemplate').html();
+                var html = Mustache.to_html(template, val);
+                $('#agencyDetail').append(html);     
+                
+                two = val['2.2'];
+                seven = val['7.2'];  
+                
+                 $.each(two, function(key, val) {
+                     name = val['name'];
+                     description = val['description'];
+                     $('#two-'+agency_id).append('<li><strong>' + name+  '</strong> - ' + description + '</li>');  
+                });
+                 
+                 $.each(seven, function(key, val) {
+                     name = val['name'];
+                     description = val['description'];
+                     $('#seven-'+agency_id).append('<li><strong>' + name+  '</strong> - ' + description + '</li>');  
+                });
+                
+                }
+            });                                    
+        });
+    }  
+
+getCompanyDetails(getUrlVar('agency_id'));
+
+</script>

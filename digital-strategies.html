@@ -1,0 +1,85 @@
+---
+layout: page
+title: Digital Strategies
+---
+
+
+<!-- Begin Federal Agency Listing --->
+<!-- Requires - http://mustache.github.io/ to run--->
+<!-- {% raw  %} and {% endraw %} are only required when using Github pages--->
+
+{% raw  %}
+<script id="agencyListingTemplate" type="text/template">       
+    <tr>
+        <td width="100" align="center" valign="middle">
+            <a href="digital-strategies-detail.html?agency_id={{agency_id}}">
+                <img src="{{logo}}" width="100" align="center" style="padding: 15px;" />
+            </a>
+        </td>
+        <td valign="middle" align="left">
+            <a href="digital-strategies-detail.html?agency_id={{agency_id}}" style="color: #000;">
+                <strong>{{name}}</strong></a>
+            </a>
+        </td>
+    </tr>    
+    <tr>
+        <td></td>
+        <td>
+            <h3>2.1</h3>
+            <ul style="padding-left: 25px;" id="two-{{agency_id}}"></ul>
+            <h3>7.1</h3>
+            <ul style="padding-left: 25px;" id="seven-{{agency_id}}"></ul>     
+        </td>
+    </tr>                                                                                           
+</script>
+{% endraw %}
+
+<p>
+    <a id="jsonlink" href="data/federal-agencies.json" target="_blank">
+        <img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-json-data-store.png" align="right" width="50" style="padding-top: 10px;" />
+    </a>
+</p>
+
+<h1>Digital Strategies</h1>
+
+<p>This is a list of federal agencies, sorted by their name, with logo and 2.2 and 7.2 of their digital strategies. The listing uses the JSON file above for its content, and you can get the <a href="https://gist.github.com/kinlane/5465511" target="_blank">script to run this listing as Github Gist</a> .</p>
+<table id="agencyListing" style="padding-left: 20px;"></table>
+
+<script type="text/javascript">
+    
+    function listAgencies()
+        {
+        $.getJSON('data/federal-agencies-digital-strategy.json', function(data) {
+             $.each(data['agencies'], function(key, val) {
+                 
+                agency_id = val['agency_id']; 
+                
+                var template = $('#agencyListingTemplate').html();
+                var html = Mustache.to_html(template, val);
+                $('#agencyListing').append(html);     
+                
+                two = val['2.2'];
+                seven = val['7.2'];  
+                
+                 $.each(two, function(key, val) {
+                     name = val['name'];
+                     description = val['description'];
+                     $('#two-'+agency_id).append('<li><strong>' + name+  '</strong> - ' + description + '</li>');  
+                });
+                 
+                 $.each(seven, function(key, val) {
+                     name = val['name'];
+                     description = val['description'];
+                     $('#seven-'+agency_id).append('<li><strong>' + name+  '</strong> - ' + description + '</li>');  
+                });
+                
+                                     
+                });
+            });
+        }  
+    
+    listAgencies();
+    
+</script>
+<!-- End Federal Agency Listing --->
+

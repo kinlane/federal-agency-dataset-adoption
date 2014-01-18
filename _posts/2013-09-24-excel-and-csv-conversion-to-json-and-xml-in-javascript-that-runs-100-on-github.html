@@ -1,0 +1,51 @@
+---
+layout: post
+title: 'Excel and CSV Conversion to JSON and XML in JavaScript That Runs 100% on Github'
+url: http://apievangelist.com/2013/09/24/excel-and-csv-conversion-to-json-and-xml-in-javascript-100-running-on-github/
+image: http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/blog/csv-converter-github.png
+---
+
+<p><p>
+     <a href="http://kinlane.github.io/csv-converter/"><img class="c1" src="https://s3.amazonaws.com/kinlane-productions/csv-converter-github.png" alt="" width="325" align="right" /></a>
+</p>
+<p>
+     When it comes to building applications within the federal government, there are numerous road-blocks to innovation. I'm currently assisting with the inventorying of open data assets at the Department of Veterans Affairs, as well as across numerous other federal agencies.
+</p>
+<p>
+     The two biggest bottlenecks of this process are:
+</p>
+<ul class="mainlist">
+     <li>
+          <strong>File Conversion</strong> - Converting Excel and CSV data assets into JSON and XML
+     </li>
+     <li>
+          <strong>File Storage</strong> - Where do you put data assets once you have available in CSV, JSON and XML
+     </li>
+</ul>
+<p>
+     When I hit these road-blocks, it is my nature to find quick and dirty technical solutions (hacks) to get around these obstacles, and do it in a way that can be taught to others, allowing them to overcome these challenges in their own worlds.
+</p>
+<p>
+     The solution I've employed involved discovering and forking of a kick ass data conversion tool called <a href="https://github.com/shancarter/Mr-Data-Converter">Mr. Data Converter</a>, and quickly the tool retrofitted with some of my own enhancements:
+</p>
+<ul class="mainlist">
+     <li>
+          <a href="http://www.w3.org/TR/FileAPI/">HTML5 File API</a> - Allows me to acces file content without server side technology.
+     </li>
+     <li>
+          <a title="oAuth" href="https://oauth.io/">oAuth.io</a> - Dead simple, client side oAuth for Github and other platforms.
+     </li>
+     <li>
+          <a href="https://github.com/michael/github">Github.js</a> - A JavaScript API wrapper for Github, enabling client-side interaction.
+     </li>
+</ul>
+<p>
+     I quickly stripped down Mr. Data Converter to have only the features I desired, added a file upload capabilities that used the File API to access CSV files without a server side layer, then after authenticating with oAuth.io via Github, I used Github.js to post the original CSV and converted JSON or XML files directly to the same Github repo that the file conversion application runs in.
+</p>
+<p>
+     This approach allows me to run the Excel / CSV conversion app 100% on Github using Github Pages--an blueprint that allows anyone to fork and run within their own Github accounts. I'll spend more time hardening the code, and documenting it, to make it easier to use, and empower anyone to use in their own open data inventorying initiatives.
+</p>
+<p>
+     You can <a href="http://kinlane.github.io/csv-converter/">see it in action live on Github Pages</a>, and get at the <a href="https://github.com/kinlane/csv-converter/tree/gh-pages">code behind in the Github repository</a>.
+</p></p>
+

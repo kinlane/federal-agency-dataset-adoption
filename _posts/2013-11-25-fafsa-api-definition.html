@@ -1,0 +1,26 @@
+---
+layout: post
+title: 'FAFSA API Definition'
+url: http://apievangelist.com/2013/11/25/fafsa-api-definition/
+image: http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/blog/Swagger-Logo.png
+---
+
+<p><p>
+     <a href="https://github.com/wordnik/swagger-core/wiki"><img class="c1" src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/swagger/Swagger-Logo.png" alt="" width="200" align="right" /></a>
+</p>
+<p>
+     To start with any API project you some sort of starting definition of how the API will work. I had generated a <a href="https://github.com/ed-data/fafsa-api/blob/master/fafsa-fields.json">JSON listing of the FAFSA fields</a> that were included in the <a href="http://www.ifap.ed.gov/appprocspecsswd/1314AppProcSysSoftwareDevSpecsAugust2013Update.html">2013-2014 Application Processing System Specifications for Software Developers</a>. Now I needed to design a basic API allowing me to add, update, retrieve and delete applications entries.
+</p>
+<p>
+     I chose to design my API using <a href="https://github.com/wordnik/swagger-core/wiki">Swagger</a>, which is a JSON definition for describing web APIs. Using Swagger I can describe how the API endpoint will behave and which parameters it accepts and the responses it returns, withouit yet writing code.
+</p>
+<p>
+     I will be using the <a href="https://github.com/ed-data/fafsa-api/blob/master/fafsa-api.json">FAFSA API definition</a> as a guide when I actually develop the functional API and the client libraries for integrating and testing the API. I will also use the API definition to generate interactive documentation when ready. For now it will be just my functional guide.
+</p>
+<p>
+     While I'm using Swagger as the initial API definition format, I will be also defining the FAFSA API using <a href="http://bit.ly/16ZTZYt">RAML</a>, which is a markdown language for defining APIs.
+</p>
+<p>
+     Next up, build a working prototype of the FAFSA API.
+</p></p>
+

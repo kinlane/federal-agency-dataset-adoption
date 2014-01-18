@@ -1,0 +1,62 @@
+---
+layout: post
+title: 'Knowing Your HTTP Status Codes In Federal Government'
+url: http://kinlane.com/2013/11/06//
+image: http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/blog/runscope-200-ok.jpeg
+---
+
+<p><table cellspacing="5" cellpadding="5" align="right">
+     <tbody>
+          <tr>
+               <td align="center">
+                    <a href="https://www.runscope.com/"><img src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/runscope/runscope-200-ok.jpeg" alt="" align="right" /></a>
+               </td>
+          </tr>
+          <tr>
+               <td align="center">
+                    <a href="https://www.runscope.com/">Photo Credit: Runscope</a>
+               </td>
+          </tr>
+     </tbody>
+</table>
+<p>
+     I've been working on open data and APIs pretty heavily since <a href="http://apievangelist.com/2012/06/01/barack-obama-directs-all-federal-agencies-to-have-an-api/">Barack Obama directed all federal agencies to go machine readable by default</a>, back in May of 2012. The White House directive told agencies to publish a copy their digital strategy at their website in the following location: [agency].gov/digitalstrategy. There was also supposed to be an HTML, XML and JSON representation of their digital strategy.
+</p>
+<p>
+     Pretty cool request. I immediately <a href="http://apievangelist.com/2012/09/21/pulling-a-federal-agencies-digital-strategy/">got busy writing a script that I could run each night and let me know which federal agency had published their digital strategy</a>. To be fair, the White House mandate was for top level agencies, not really all <a href="http://federal-government.apievangelist.com/federal-agencies.html">246 as I showcase</a>. However, I think it is a process that all agencies can learn from, so I leave it up.
+</p>
+<p>
+     Back to pulling the digital strategy for each agency. First I needed all the agencies website addresses, which I pulled from the <a href="http://www.usa.gov/About/developer-resources/federal-agency-directory/">federal agency directory API</a>. I then appended /digitalstrategy.html, and /digitalstrategy.xml, and /digitalstrategy.json to each agency URL. Now remember, I am a script or piece of code trying to determine if one of 246 x 3 pages exist. I'm not a human looking at each page load with my eyeballs. The only think I have to tell me what is happening is the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP status code(s)</a>:
+</p>
+<ul>
+     <li>200 - Ok, The request has succeeded. 
+     </li>
+     <li>301 - Moved Permanently 
+     </li>
+     <li>404 - Not Found
+     </li>
+</ul>
+<p>
+     What the government agency sends to me as a status code triggers one of three responses in my code:
+</p>
+<ul>
+     <li>200 - They have published their digital strategy 
+     </li>
+     <li>301 - They have published their strategy but it is located somewhere else 
+     </li>
+     <li>404 - They have NOT published their digital strategy
+     </li>
+</ul>
+<p>
+     After you run the script you see most of the agencies return a 404--not published. Ok, but then I started seeing 301 without an actual URL that redirected me to existing location. I saw published digital strategies return 404 and unpublished strategies return 200. While most agencies adhered to basic HTTP principles, some I just had to hard code. I had to manually code a section saying IF agency = XX then assume this response code. This is a pretty basic problem, something you won't see unless you actually write some code against the situation (which I assume agencies aren't doing).
+</p>
+<p>
+     Fast-forward two years you have the <a href="http://www.whitehouse.gov/omb">Office of Management and Budget (OMB)</a> directing that <a href="http://www.whitehouse.gov/the-press-office/2013/05/09/executive-order-making-open-and-machine-readable-new-default-government-">government agencies post .data.json</a> files in a similiar way to the earlier digital strategy. I hope someday they will also require /api.son files, /roadmap.json and other machine readable goodies, but that is another story. This story is about proper HTTP status codes.
+</p>
+<p>
+     Each government agencies should be publishing their /digitalstrategy and /data.json files at their website, and they should be properly returning 200 OK or a 301 with proper URI of where you put your digitalstrategy.json or data.json (or other resource). It is acceptable to have these files in an alternate location, but you must provide a complete 301 status code so that my code or script can properly make a decision and properly locate your digitalstrategy.json or data.json files.
+</p>
+<p>
+     I thought I wrote this story last year, but apparently the story in my head didn't match what I actually published to my blog. So I wanted to make sure there was a fresh copy to help government agencies understand this simple, but very important aspect of their digital strategy.
+</p></p>
+

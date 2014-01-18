@@ -1,0 +1,23 @@
+title : Federal Government
+
+safe: true
+lsi: false
+pygments: true
+auto: true
+
+source: federal-government
+destination: federal-government
+
+permalink: /:categories/:year/:month/:day/:title 
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+
+paginate: 10
+paginate_path: "/blog/page:num"
+
+production_url : http://federal-government.apievangelist.com
+
+BASE_PATH : http://federal-government.apievangelist.com
+
+archive_path: /archive.html
+categories_path : /categories.html
+tags_path : /tags.html
