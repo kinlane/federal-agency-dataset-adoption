@@ -84,7 +84,7 @@ getFederAgencyDetails(agencyid);
 function showDIV(r)
     {
     $row = document.getElementById(r);    
-    alert(r);
+    //alert(r);
     if($row.style.display=='none')
         {
         $row.style.display='';    
@@ -119,20 +119,22 @@ function getFederalAgencyDatasets(thisagencyid)
                 });                 
                 
             $download_url = val['download_url'];   
-            if($download_url)
+            if(!$download_url.equals(null))
                 {
                 if($download_url.length < 5)
                     {
                     id = agencyid + '-' + unique + '-download-url';
+                    console.log(id);
                     document.getElementById(id).innerHTML = '';
                     }
                 }
             $accessURL = val['accessURL'];       
-            if($accessURL)
+            if(!$accessURL.equals(null))
                 {
                 if($accessURL.length < 5)
                     {
                     id = agencyid + '-' + unique + '-access-url';
+                    console.log(id);
                     document.getElementById(id).innerHTML = '';
                     }                
                 }
