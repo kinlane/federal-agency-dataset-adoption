@@ -44,7 +44,7 @@ title: Adopt Dataset
                 repo.write('master','data.json', $DataJSONEntry, 'Updating the data.json entry.', function(err) {
             
                     redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-4.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                 
-                    setTimeout(callback(redirectURL), 5000); 
+                    setTimeout(callback(redirectURL), 2000); 
                     
                     });                
                 
