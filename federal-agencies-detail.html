@@ -121,23 +121,35 @@ function getFederalAgencyDatasets(thisagencyid)
             $download_url = val['download_url'];   
             if($download_url == null)
                 {
-                if($download_url.length < 5)
-                    {
-                    id = agencyid + '-' + unique + '-download-url';
-                    //console.log(id);
-                    document.getElementById(id).innerHTML = '';
-                    }
+                id = agencyid + '-' + unique + '-download-url';
+               // console.log(id);
+                document.getElementById(id).innerHTML = '';              
                 }
+            else
+                {
+                if($download_url.length < 5)
+                    {  
+                    id = agencyid + '-' + unique + '-download-url';
+                    // console.log(id);
+                    document.getElementById(id).innerHTML = ''
+                    }
+               }
             $accessURL = val['accessURL'];       
             if($accessURL == null)
                 {
-                if($accessURL.length < 5)
-                    {
-                    id = agencyid + '-' + unique + '-access-url';
-                   // console.log(id);
-                    document.getElementById(id).innerHTML = '';
-                    }                
+                id = agencyid + '-' + unique + '-access-url';
+               // console.log(id);
+                document.getElementById(id).innerHTML = '';              
                 }
+            else
+                {
+                if($accessURL.length < 5)
+                    {  
+                    id = agencyid + '-' + unique + '-access-url';
+                    // console.log(id);
+                    document.getElementById(id).innerHTML = ''
+                    }
+               }
             });                                    
         });
     }  
