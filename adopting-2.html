@@ -22,7 +22,8 @@ title: Adopt Dataset
     
     $url = "/data/" + $agencyid + ".json";
     console.log($url);
-    $oAuth_Token = getUrlVar('oAuth_Token');  
+    $oAuth_Token = getUrlVar('oAuth_Token'); 
+    console.log($oAuth_Token); 
     
     $.getJSON($url, function(data) {        
          $.each(data, function(key, val) {           
@@ -46,6 +47,15 @@ title: Adopt Dataset
             });
   
     var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
-    
+    repo.fork(function(err) {
+        
+        alert(dodump());
+        
+        //$("#displayMe").append("forking " + $repo + "<br />");                                        
+     
+       // redirectURL = "http://simple-api.github.io/central/build-3.html?repo=" + $repo + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin;                                                                                                                        
+       // setTimeout(callback(redirectURL), 5000); 
+        
+    }); 
      
   </script> 
