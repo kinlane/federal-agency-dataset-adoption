@@ -22,8 +22,6 @@ title: Adopt Dataset
     
     $url = "/data/" + $agencyid + ".json";
     console.log($url);
-    $oAuth_Token = getUrlVar('oAuth_Token'); 
-    console.log($oAuth_Token); 
     
     $.getJSON($url, function(data) {        
          $.each(data, function(key, val) {           
@@ -41,21 +39,29 @@ title: Adopt Dataset
     $cleanrepo = $thistitle.replace("-","");
     $cleanrepo = $cleanrepo.toLowerCase();
 
-    var github = new Github({
-        token: $oAuth_Token,
-        auth: "oauth"
-            });
-  
-    var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
-    repo.fork(function(err) {
+    // Replace with your oAuth.io token, this will only work under the Simple API @ Github domain
+    OAuth.initialize('4z2dqjk_zP5upbNL3ToJgEOHGOg');
+    OAuth.callback('github', function(err, result) {
         
-        alert(dodump());
+        $oAuth_Token = result.access_token;
+        document.getElementById("oAuth_Token").value = $oAuth_Token;
+        console.log($oAuth_Token); 
         
-        //$("#displayMe").append("forking " + $repo + "<br />");                                        
-     
-       // redirectURL = "http://simple-api.github.io/central/build-3.html?repo=" + $repo + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin;                                                                                                                        
-       // setTimeout(callback(redirectURL), 5000); 
-        
+        var github = new Github({
+            token: $oAuth_Token,
+            auth: "oauth"
+                });
+          
+        var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
+        repo.fork(function(err) {
+            
+            alert(dodump());
+            
+            //$("#displayMe").append("forking " + $repo + "<br />");                                        
+         
+           // redirectURL = "http://simple-api.github.io/central/build-3.html?repo=" + $repo + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin;                                                                                                                        
+           // setTimeout(callback(redirectURL), 5000); 
+            
+        }); 
     }); 
-     
   </script> 
