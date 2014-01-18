@@ -26,30 +26,31 @@ title: Adopt Dataset
     
     $.getJSON($url, function(data) {        
          $.each(data, function(key, val) {           
-           alert(val['title']);
+
            $DataJSONEntry = JSON.stringify(val); 
-           alert($DataJSONEntry);
+
             $thisunique = val['unique']; 
             if($thisunique == $unique)
                 {
                 $thistitle = val['title'];    
                 console.log($thistitle);
+                
+                var github = new Github({
+                    token: $oAuth_Token,
+                    auth: "oauth"
+                        });
+              
+                var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+                repo.write('master','data.json', $DataJSONEntry, 'Updating the data.json entry.', function(err) {
+            
+                    redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-4.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                 
+                    setTimeout(callback(redirectURL), 5000); 
+                    
+                    });                
+                
                 }
             });                                    
         });        
-    
-    var github = new Github({
-        token: $oAuth_Token,
-        auth: "oauth"
-            });
-  
-    var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-    repo.write('master','data.json', $DataJSONEntry, 'Updating the data.json entry.', function(err) {
-
-        redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-4.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                 
-        setTimeout(callback(redirectURL), 5000); 
-        
-        });
 
      
   </script> 
