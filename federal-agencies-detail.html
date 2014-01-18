@@ -54,6 +54,9 @@ getFederAgencyDetails(agencyid);
     <tr style="display:none;" id="{{agency_id}}-description">
         <td colspan="4">{{description}}</td>
     </tr>    
+    <tr style="display:none;" id="{{agency_id}}-distributions">
+        <td colspan="4">[put here]</td>
+    </tr>      
     
 </script>
 {% endraw %}
@@ -79,14 +82,14 @@ getFederAgencyDetails(agencyid);
 function showDescription(r)
     {
     $row = document.getElementById(r);    
-    alert($row.style.display);
+    //alert($row.style.display);
     if($row.style.display=='none')
         {
-        $row.style.display=='';    
+        $row.style.display='';    
         }   
     else
         {
-        $row.style.display=='none';        
+        $row.style.display='none';        
         }
     }
     
