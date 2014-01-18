@@ -44,7 +44,6 @@ title: Adopt Dataset
     OAuth.callback('github', function(err, result) {
         
         $oAuth_Token = result.access_token;
-        document.getElementById("oAuth_Token").value = $oAuth_Token;
         console.log($oAuth_Token); 
         
         var github = new Github({
