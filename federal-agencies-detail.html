@@ -47,10 +47,13 @@ getFederAgencyDetails(agencyid);
 
     <tr>
         <td>{{title}}</td>
-        <td><span class="label label-primary">D</span</td>
+        <td><span class="label label-primary"><a href="#" onclick="showDescription('{{agency_id}}-description');">D</span</td>
         <td><span class="label label-primary">L</span</td>
         <td><span class="label label-primary">A</span</td>
     </tr>
+    <tr style="display:none;" id="{{agency_id}}-description">
+        <td colspan="4">{{description}}</td>
+    </tr>    
     
 </script>
 {% endraw %}
@@ -72,6 +75,20 @@ getFederAgencyDetails(agencyid);
 </div>  
 
 <script type="text/javascript">
+
+function showDescription(r)
+    {
+    $row = document.getElementById(r);    
+    if($row.style.display=='none')
+        {
+        $row.style.display=='';    
+        }   
+    else
+        {
+        $row.style.display=='none';        
+        }
+    }
+    
 function getFederalAgencyDatasets(thisagencyid)
     {
     agencydatajsonurl = '/data/' + thisagencyid + '.json';    
