@@ -26,9 +26,9 @@ title: Adopt Dataset
     
     $.getJSON($url, function(data) {        
          $.each(data, function(key, val) {           
-            
+           alert(val['title']);
            $DataJSONEntry = JSON.stringify(val); 
-            
+           alert($DataJSONEntry);
             $thisunique = val['unique']; 
             if($thisunique == $unique)
                 {
