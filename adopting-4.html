@@ -37,11 +37,7 @@ title: Adopt Dataset
             });
   
     var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-    
-    var $Manifest = "";                                  
-                       
-    var repo2 = github.getRepo($UserLogin, $repo);
-    repo2.write('master','adoption-entry.json', $DataJSONEntry, 'Updating the adoption-entry.json entry.', function(err) {
+    repo.write('master','adoption-entry.json', $DataJSONEntry, 'Updating the adoption-entry.json entry.', function(err) {
         
         redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
         setTimeout(callback(redirectURL), 5000); 
