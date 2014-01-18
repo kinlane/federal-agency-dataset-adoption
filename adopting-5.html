@@ -57,7 +57,7 @@ title: Adopt Dataset
         $READMEPage = $READMEPage.replace('[title]',$AgencyDatasetTitle);
         $READMEPage = $READMEPage.replace('[agency name]',$AgencyName);
         
-        repo2.write('master','README.md', $READMEPage, 'Updating the README.', function(err) {
+        repo.write('master','README.md', $READMEPage, 'Updating the README.', function(err) {
       
             //redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
             //setTimeout(callback(redirectURL), 5000);              
