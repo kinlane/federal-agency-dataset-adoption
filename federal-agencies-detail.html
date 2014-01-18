@@ -49,13 +49,16 @@ getFederAgencyDetails(agencyid);
         <td>
             <strong>{{title}}</strong>
             <div style="display:none; width: 100%; height: 100px; overflow: auto; border-top: 1px solid #000; margin-top: 5px;" id="{{unique}}-description">{{description}}</div>
-            <div style="display:none; width: 100%; height: 100px; overflow: auto; border-top: 1px solid #000; margin-top: 5px;" id="{{unique}}-distributions"></div>
+            <div style="display:none; width: 100%; height: 100px; overflow: auto; border-top: 1px solid #000; margin-top: 5px;" id="{{unique}}-distributions"><ul id="{{unique}}-distribution-list"></div>
         </td>
         <td><a href="#" onclick="showDescription('{{unique}}-description'); return false;"><span class="label label-primary">D</span></a></td>
         <td><a href="{{download_url}}" target="_blank"><span class="label label-primary">L</span></a></td>
         <td><a href="{{accessURL}}" target="_blank"><span class="label label-primary">A</span></a></td>
     </tr>    
     
+</script>
+<script id="agencydatadistributiontemplate" type="text/template">
+    <li><a href="{{accessURL}}" target="_blank">{{accessURL}}</a></li>
 </script>
 {% endraw %}
 
@@ -97,13 +100,20 @@ function getFederalAgencyDatasets(thisagencyid)
     $.getJSON(agencydatajsonurl, function(data) {
          $.each(data, function(key, val) {  
              
-            distribution = val['distribution'];  
-             
-            console.log(distribution); 
+            unique = val['unique']; 
+            distribution = val['distribution'];    
              
             var template = $('#agencydatatemplate').html();
             var html = Mustache.to_html(template, val);
-            $('#agencydata').append(html);     
+            $('#agencydata').append(html); 
+                
+             $.each(distribution, function(key2, val2) {  
+                console.log(unique);
+                var template = $('#agencydatadistributiontemplate').html();
+                var html = Mustache.to_html(template, val);
+                $('#'+unique+'-distribution-list').append(html);                    
+                });                 
+                
             });                                    
         });
     }  
