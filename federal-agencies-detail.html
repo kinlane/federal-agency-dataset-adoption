@@ -119,7 +119,7 @@ function getFederalAgencyDatasets(thisagencyid)
                 });                 
                 
             $download_url = val['download_url'];   
-            if(!$download_url.equals(null))
+            if($download_url != null)
                 {
                 if($download_url.length < 5)
                     {
@@ -129,7 +129,7 @@ function getFederalAgencyDatasets(thisagencyid)
                     }
                 }
             $accessURL = val['accessURL'];       
-            if(!$accessURL.equals(null))
+            if($accessURL != null)
                 {
                 if($accessURL.length < 5)
                     {
