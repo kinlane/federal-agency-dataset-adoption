@@ -39,9 +39,12 @@ title: Adopt Dataset
     $cleanrepo = $thistitle.replace("-","");
     $cleanrepo = $cleanrepo.toLowerCase();
 
-    // Replace with your oAuth.io token, this will only work under the Simple API @ Github domain
+    alert("Starting!");
+
     OAuth.initialize('4z2dqjk_zP5upbNL3ToJgEOHGOg');
     OAuth.callback('github', function(err, result) {
+        
+        alert("IN!");
         
         $oAuth_Token = result.access_token;
         console.log($oAuth_Token); 
