@@ -48,7 +48,7 @@ getFederAgencyDetails(agencyid);
         <td>
             <strong>{{title}}</strong>
             <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-description">{{description}}</div>
-            <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-distributions"><ul id="{{unique}}-distribution-list"></div>
+            <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-distributions"><ul id="{{agency_id}}-{{unique}}-distribution-list"></div>
         </td>
         <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
         <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
@@ -84,7 +84,7 @@ getFederAgencyDetails(agencyid);
 function showDIV(r)
     {
     $row = document.getElementById(r);    
-    //alert($row.style.display);
+    alert(r);
     if($row.style.display=='none')
         {
         $row.style.display='';    
