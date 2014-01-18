@@ -4,7 +4,6 @@ title: Federal Agency
 ---
 {% raw  %}
 <script id="agencyTemplate" type="text/template">
-
     <center><h2>{{name}}</h2></center>
     <p align="center"><img src="{{logo}}" width="250" style="padding: 15px;" /></a></p>
     <p align="center">
@@ -21,6 +20,7 @@ title: Federal Agency
 function getFederAgencyDetails(thisagencyid)
     {
     $.getJSON('data/federal-agencies.json', function(data) {
+        
          $.each(data['agencies'], function(key, val) {
             
             agency_id = val['agency_id']; 
@@ -51,10 +51,10 @@ getFederAgencyDetails(agencyid);
             <div style="display:none; width: 100%; margin-top: 5px;" id="{{unique}}-description">{{description}}</div>
             <div style="display:none; width: 100%; margin-top: 5px;" id="{{unique}}-distributions"><ul id="{{unique}}-distribution-list"></div>
         </td>
-        <td><a href="#" onclick="showDIV('{{unique}}-description'); return false;"><span class="label label-primary">D</span></a></td>
-        <td><a href="#" onclick="showDIV('{{unique}}-distributions'); return false;"><span class="label label-primary">D</span></a></td>
-        <td><a href="{{download_url}}" target="_blank"><span class="label label-primary">L</span></a></td>
-        <td><a href="{{accessURL}}" target="_blank"><span class="label label-primary">A</span></a></td>
+        <td><a href="#" onclick="showDIV('{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
+        <td><a href="#" onclick="showDIV('{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
+        <td><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)">L</span></a></td>
+        <td><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)">A</span></a></td>
     </tr>    
     
 </script>
@@ -62,6 +62,8 @@ getFederAgencyDetails(agencyid);
     <li><a href="{{accessURL}}" target="_blank">{{accessURL}}</a></li>
 </script>
 {% endraw %}
+
+<p align="center" id="agency-dataset-count">Total Number of Datasets = 0</p>
 
 <div class="table-responsive">
       <table class="table table-bordered table-striped">
@@ -99,6 +101,10 @@ function getFederalAgencyDatasets(thisagencyid)
     {
     agencydatajsonurl = '/data/' + thisagencyid + '.json';    
     $.getJSON(agencydatajsonurl, function(data) {
+        
+         datasetcount = count(data);
+         document.getElementById('agency-dataset-count').innerHTML = 'Total Number of Datasets = ' + datasetcount;
+         
          $.each(data, function(key, val) {  
              
             unique = val['unique']; 
