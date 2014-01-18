@@ -102,7 +102,7 @@ function getFederalAgencyDatasets(thisagencyid)
     agencydatajsonurl = '/data/' + thisagencyid + '.json';    
     $.getJSON(agencydatajsonurl, function(data) {
         
-         datasetcount = count(data);
+         datasetcount = data.length;
          document.getElementById('agency-dataset-count').innerHTML = 'Total Number of Datasets = ' + datasetcount;
          
          $.each(data, function(key, val) {  
