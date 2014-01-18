@@ -39,8 +39,14 @@ title: Adopt Dataset
     var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
     repo.write('master','adoption-entry.json', $DataJSONEntry, 'Updating the adoption-entry.json entry.', function(err) {
         
-        redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
-        setTimeout(callback(redirectURL), 5000); 
+        $.getJSON("http://api.publicprivatesector.org/adopt/?unique="+$Unique+"&agencyid="+$agencyid+"&account="+$UserLogin,function(data) {
+                
+                var response = data.response;
+                alert(response);
+                //redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
+                //setTimeout(callback(redirectURL), 5000);                 
+                         
+            });         
         
         });
 
