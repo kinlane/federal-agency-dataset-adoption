@@ -62,7 +62,7 @@ function getFederalAgencyDatasets(thisagencyid)
     {
     agencydatajsonurl = '/data/' + thisagencyid + '.json';    
     $.getJSON(agencydatajsonurl, function(data) {
-         $.each(data, function(key, val) {
+         $.each(data['agencies'], function(key, val) {
             
             agency_id = val['agency_id']; 
 
