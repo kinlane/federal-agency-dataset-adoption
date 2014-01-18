@@ -1,0 +1,52 @@
+---
+layout: page
+title: Adopt Dataset
+---
+
+
+  <h1>Adopting...</h1>
+  
+  <p align="center"><img src="https://s3.amazonaws.com/kinlane-productions/loading.gif" id="loading" width="150" /></p>
+  
+  <script type="text/javascript">  
+  
+    function callback(url){
+        return function(){
+            location.href=url;
+        }
+    }               
+  
+    $Unique = getUrlVar('unique'); 
+    $UserLogin = getUrlVar('account');     
+    $agencyid = getUrlVar('agencyid');     
+    $oAuth_Token = getUrlVar('oAuth_Token');  
+    
+    $url = "/data/" + $agencyid + ".json";
+    console.log($url);
+    
+    $Schema = {};
+    $Schema['adoption'] = 'federal-agency-dataset-adoption';
+    $Schema['agencyid'] = $agencyid;
+    $Schema['unique'] = $Unique;
+    $Schema['account'] = $UserLogin;       
+    $DataJSONEntry = JSON.stringify($Schema); 
+    
+    var github = new Github({
+        token: $oAuth_Token,
+        auth: "oauth"
+            });
+  
+    var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+    
+    var $Manifest = "";                                  
+                       
+    var repo2 = github.getRepo($UserLogin, $repo);
+    repo2.write('master','adoption-entry.json', $DataJSONEntry, 'Updating the adoption-entry.json entry.', function(err) {
+        
+        redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
+        setTimeout(callback(redirectURL), 5000); 
+        
+        });
+
+     
+  </script> 

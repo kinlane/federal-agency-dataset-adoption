@@ -34,18 +34,10 @@ title: Adopt Dataset
                 }
             });                                    
         });  
-
-    
-    $cleanrepo = $thistitle.replace("-","");
-    $cleanrepo = $cleanrepo.toLowerCase();
-
-    alert("Starting!");
-
+        
     OAuth.initialize('4z2dqjk_zP5upbNL3ToJgEOHGOg');
     OAuth.callback('github', function(err, result) {
-        
-        alert("IN!");
-        
+
         $oAuth_Token = result.access_token;
         console.log($oAuth_Token); 
         
@@ -53,17 +45,19 @@ title: Adopt Dataset
             token: $oAuth_Token,
             auth: "oauth"
                 });
+                
+        var user = github.getUser();
+        user.show('', function(err, thisuser) {
+            
+           $User = thisuser; 
+           $UserLogin = $User['login'];   
+           
+        });                
           
         var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
         repo.fork(function(err) {
-            
-            //alert(dodump());
-            
-            //$("#displayMe").append("forking " + $repo + "<br />");                                        
-         
-           // redirectURL = "http://simple-api.github.io/central/build-3.html?repo=" + $repo + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin;                                                                                                                        
-           // setTimeout(callback(redirectURL), 5000); 
-            
+           redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-3.html?unique=" + $unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                                                        
+           setTimeout(callback(redirectURL), 5000);            
         }); 
     }); 
   </script> 

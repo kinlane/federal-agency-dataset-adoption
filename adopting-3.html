@@ -1,0 +1,59 @@
+---
+layout: page
+title: Adopt Dataset
+---
+
+
+  <h1>Adopting...</h1>
+  
+  <p align="center"><img src="https://s3.amazonaws.com/kinlane-productions/loading.gif" id="loading" width="150" /></p>
+  
+  <script type="text/javascript">  
+  
+    function callback(url){
+        return function(){
+            location.href=url;
+        }
+    }               
+  
+    $Unique = getUrlVar('unique'); 
+    $UserLogin = getUrlVar('account');     
+    $agencyid = getUrlVar('agencyid');     
+    $oAuth_Token = getUrlVar('oAuth_Token'); 
+    
+    $url = "/data/" + $agencyid + ".json";
+    console.log($url);
+    
+    $.getJSON($url, function(data) {        
+         $.each(data, function(key, val) {           
+            
+           $DataJSONEntry = JSON.stringify(val); 
+            
+            $thisunique = val['unique']; 
+            if($thisunique == $unique)
+                {
+                $thistitle = val['title'];    
+                console.log($thistitle);
+                }
+            });                                    
+        });        
+    
+    var github = new Github({
+        token: $oAuth_Token,
+        auth: "oauth"
+            });
+  
+    var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+    
+    var $Manifest = "";                                  
+                       
+    var repo2 = github.getRepo($UserLogin, $repo);
+    repo2.write('master','data.json', $DataJSONEntry, 'Updating the data.json entry.', function(err) {
+
+        redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-4.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                 
+        setTimeout(callback(redirectURL), 5000); 
+        
+        });
+
+     
+  </script> 
