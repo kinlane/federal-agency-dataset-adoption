@@ -31,19 +31,17 @@ title: Adopt Dataset
     $apiurl = "http://api.publicprivatesector.org/adopt/?agencyid="+$agencyid+"&unique="+$Unique+"&account="+$UserLogin+"&slug="+$slug;    
     $.getJSON($apiurl,function(data) {  
                           
-            var response = data.response;
-            //$("#displayMe").append(response + "<br />");
+        var response = data.response;
+        //$("#displayMe").append(response + "<br />");
+        
+        var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+        repo.remove($slug,'README2.md', function(err) {
             
-            var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-
-            repo.remove($slug,'README2.md', function(err) {
-                
-                redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" + $slug;
-                //console.log($slug);
-                setTimeout(callback(redirectURL), 1000);                      
-                
-                });                    
-            });                 
+            redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" + $slug;
+            //console.log($slug);
+            setTimeout(callback(redirectURL), 1000);                      
+            
+            });                                   
         });           
      
   </script> 
