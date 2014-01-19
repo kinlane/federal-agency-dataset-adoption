@@ -67,10 +67,18 @@ title: Adopt Dataset
             repo.remove('master','README2.md', function(err) {
                 
                 repo.remove($slug,'README2.md', function(err) {
-                    
-                    redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" . $slug;
-                    setTimeout(callback(redirectURL), 500);                  
+                 
+                $apiurl = "http://api.gsa.apievangelist.com/utility/updateindex/?agencyid="+$agencyid+"&unique="+$Unique+"&account="+$UserLogin+"&slug="+$slug;    
+                $.getJSON($apiurl,function(data) {
+                            
+                        var response = data.response;
+                        //$("#displayMe").append(response + "<br />");
                         
+                        redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" . $slug;
+                        setTimeout(callback(redirectURL), 500);                  
+     
+                    });                     
+                    
                 });              
                     
             });                
