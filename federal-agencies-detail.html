@@ -45,7 +45,7 @@ getFederAgencyDetails(agencyid);
 {% raw  %}
 <script id="agencydatatemplate" type="text/template">
     <tr>
-        <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-adoptions'); return false;" title="Dataset has been adopted"><img src="https://s3.amazonaws.com/kinlane-productions/icon-set/green-check-150.png" width="25" /></a></td>
+        <td id="{{agency_id}}-{{unique}}-adoption-check"><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-adoptions'); return false;" title="Dataset has been adopted"><img src="https://s3.amazonaws.com/kinlane-productions/icon-set/green-check-150.png" width="25" /></a></td>
         <td>
             <strong>{{title}}</strong>
             <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-description">{{description}}</div>
@@ -126,7 +126,13 @@ function getFederalAgencyDatasets(thisagencyid)
                 var html = Mustache.to_html(template, val2);
                 $('#'+agencyid+'-'+unique+'-distribution-list').append(html);  
                 anydistributions = 1;                  
-                });     
+                });
+            if(anydistributions==0)
+                {
+                id = agencyid + '-' + unique + '-adoption-check ';
+               // console.log(id);
+                document.getElementById(id).innerHTML = '';                                         
+                } 
                 
             adoptions = val['adoptions'];  
             anyadoptions = 0;  
@@ -135,7 +141,13 @@ function getFederalAgencyDatasets(thisagencyid)
                 var html = Mustache.to_html(template, val2);
                 $('#'+agencyid+'-'+unique+'-adoption-list').append(html);
                 anyadoptions = 1;                      
-                });                              
+                });    
+            if(anyadoptions==0)
+                {
+                id = agencyid + '-' + unique + '-adoption-check ';
+               // console.log(id);
+                document.getElementById(id).innerHTML = '';                                         
+                }                          
                 
             $download_url = val['download_url'];   
             if($download_url == null)
