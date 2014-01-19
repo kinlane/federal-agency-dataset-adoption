@@ -62,8 +62,7 @@ title: Adopt Dataset
         $READMEPage = $READMEPage.replace('[agency name]',$AgencyName);
         
         repo.write($slug,'README.md', $READMEPage, 'Updating the README.', function(err) {
-      
-      
+         
             repo.remove('master','README2.md', function(err) {
                 
                 repo.remove($slug,'README2.md', function(err) {
