@@ -45,10 +45,12 @@ getFederAgencyDetails(agencyid);
 {% raw  %}
 <script id="agencydatatemplate" type="text/template">
     <tr>
+        <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-adoptions'); return false;" title="Dataset has been adopted"><img src="http://kinlane-productions.s3.amazonaws.com/icon-set/green-check-150.jpg" width="25" /></a></td>
         <td>
             <strong>{{title}}</strong>
             <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-description">{{description}}</div>
             <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-distributions"><ul id="{{agency_id}}-{{unique}}-distribution-list"></div>
+            <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-adoptions"><ul id="{{agency_id}}-{{unique}}-adoption-list"></div>
         </td>
         <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
         <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
@@ -56,6 +58,9 @@ getFederAgencyDetails(agencyid);
         <td id="{{agency_id}}-{{unique}}-access-url"><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)">A</span></a></td>
         <td><a href="adopting-1.html?unique={{unique}}&agencyid={{agency_id}}" title="Adopt this dataset"><span class="label label-danger">Adopt</span></a></td>
     </tr>    
+</script>
+<script id="agencydataadoptiontemplate" type="text/template">
+    <li><a href="{{url}}" target="_blank">{{account}}</a></li>
 </script>
 <script id="agencydatadistributiontemplate" type="text/template">
     <li><a href="{{accessURL}}" target="_blank">{{accessURL}}</a></li>
@@ -68,7 +73,9 @@ getFederAgencyDetails(agencyid);
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
+            <th></th>
             <th>Title</th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -107,17 +114,28 @@ function getFederalAgencyDatasets(thisagencyid)
          $.each(data, function(key, val) {  
              
             unique = val['unique']; 
-            distribution = val['distribution'];
                              
             var template = $('#agencydatatemplate').html();
             var html = Mustache.to_html(template, val);
             $('#agencydata').append(html); 
-                
-             $.each(distribution, function(key2, val2) {  
+            
+            distribution = val['distribution'];   
+            anydistributions = 0; 
+            $.each(distribution, function(key2, val2) {  
                 var template = $('#agencydatadistributiontemplate').html();
                 var html = Mustache.to_html(template, val2);
-                $('#'+agencyid+'-'+unique+'-distribution-list').append(html);                    
-                });                 
+                $('#'+agencyid+'-'+unique+'-distribution-list').append(html);  
+                anydistributions = 1;                  
+                });     
+                
+            adoptions = val['adoptions'];  
+            anyadoptions = 0;  
+            $.each(adoptions, function(key2, val2) {  
+                var template = $('#agencydataadoptiontemplate').html();
+                var html = Mustache.to_html(template, val2);
+                $('#'+agencyid+'-'+unique+'-adoption-list').append(html);
+                anyadoptions = 1;                      
+                });                              
                 
             $download_url = val['download_url'];   
             if($download_url == null)
