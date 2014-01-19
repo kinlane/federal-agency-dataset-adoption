@@ -50,7 +50,7 @@ title: Adopt Dataset
                     token: $oAuth_Token,
                     auth: "oauth"
                         });
-              repo.branch(oldBranchName, newBranchName, function(err) {}); 
+                        
                 // create branch
                 var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
                 repo.branch('master',$slug, function(err) {
