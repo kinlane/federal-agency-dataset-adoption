@@ -51,14 +51,14 @@ title: Adopt Dataset
         user.show('', function(err, thisuser) {
             
            $User = thisuser; 
-           $UserLogin = $User['login'];   
+           $UserLogin = $User['login'];
+               
+            var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
+            var forked = repo.fork(function(err) {});
+            
+            alert($UserLogin + ' - ' + forked);               
            
         });                
-          
-        var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
-        var forked = repo.fork(function(err) {});
-        
-        alert($UserLogin + ' - ' + forked); 
       
     
     }); 
