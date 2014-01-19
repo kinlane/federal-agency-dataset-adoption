@@ -53,7 +53,7 @@ getFederAgencyDetails(agencyid);
             <div style="display:none; width: 100%; margin-top: 5px;" id="{{agency_id}}-{{unique}}-adoptions"><ul id="{{agency_id}}-{{unique}}-adoption-list"></div>
         </td>
         <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-description'); return false;" title="Description of dataset"><span class="label label-primary">D</span></a></td>
-        <td><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
+        <td id="{{agency_id}}-{{unique}}-distributions-check"><a href="#" onclick="showDIV('{{agency_id}}-{{unique}}-distributions'); return false;" title="Distributions of dataset"><span class="label label-primary">D</span></a></td>
         <td id="{{agency_id}}-{{unique}}-download-url"><a href="{{download_url}}" target="_blank"><span class="label label-primary" title="Download URL (if used)">L</span></a></td>
         <td id="{{agency_id}}-{{unique}}-access-url"><a href="{{accessURL}}" target="_blank"><span class="label label-primary" title="Access URL (if used)">A</span></a></td>
         <td><a href="adopting-1.html?unique={{unique}}&agencyid={{agency_id}}" title="Adopt this dataset"><span class="label label-danger">Adopt</span></a></td>
@@ -129,7 +129,7 @@ function getFederalAgencyDatasets(thisagencyid)
                 });
             if(anydistributions==0)
                 {
-                id = agencyid + '-' + unique + '-adoption-check ';
+                id = agencyid + '-' + unique + '-distributions-check ';
                // console.log(id);
                 document.getElementById(id).innerHTML = '';                                         
                 } 
