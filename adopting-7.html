@@ -58,11 +58,11 @@ title: Adopt Dataset
         $READMEPage = $READMEPage.replace('[title]',$AgencyDatasetTitle);
         $READMEPage = $READMEPage.replace('[agency name]',$AgencyName);
         
-        repo.write('master','README.md', $READMEPage, 'Updating the README.', function(err) {
+        repo.write($slug,'README.md', $READMEPage, 'Updating the README.', function(err) {
       
-           redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-4.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid + "&slug=" + $slug;                                                                                 
-           setTimeout(callback(redirectURL), 1000);             
-
+            redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
+            setTimeout(callback(redirectURL), 1000);              
+        
           });
        });             
      

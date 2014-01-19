@@ -19,50 +19,39 @@ title: Adopt Dataset
     $Unique = getUrlVar('unique'); 
     $UserLogin = getUrlVar('account');     
     $agencyid = getUrlVar('agencyid');     
-    $oAuth_Token = getUrlVar('oAuth_Token');  
-        
-    $AgencyName = "";
-    $.getJSON('data/federal-agencies.json', function(data) {        
-         $.each(data['agencies'], function(key, val) {            
-            $thisagencyid = val['agency_id']; 
-            if($thisagencyid == $agencyid)
-                {                    
-                $AgencyName = val['name']; 
-                }
-            });                                    
-        });    
+    $oAuth_Token = getUrlVar('oAuth_Token');
+    $slug = getUrlVar('slug');  
     
-    $AgencyDatasetTitle = "";   
     $url = "/data/" + $agencyid + ".json";
+    console.log($url);
+    
     $.getJSON($url, function(data) {        
-         $.each(data, function(key, val) {            
+         $.each(data, function(key, val) {           
+
+           $DataJSONEntry = JSON.stringify(val); 
+
             $thisunique = val['unique']; 
             if($thisunique == $Unique)
-                {                    
-                $AgencyDatasetTitle = val['title'];                
+                {
+                $thistitle = val['title'];    
+                console.log($thistitle);
+                
+                var github = new Github({
+                    token: $oAuth_Token,
+                    auth: "oauth"
+                        });
+              
+                var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+                repo.write($slug,'data.json', $DataJSONEntry, 'Updating the data.json entry.', function(err) {
+            
+                    redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-6.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid + "&slug=" + $slug;                                                                                  
+                    setTimeout(callback(redirectURL), 1000); 
+                    
+                    });                
+                
                 }
             });                                    
-        });
-    
-    var github = new Github({
-        token: $oAuth_Token,
-        auth: "oauth"
-            });
-            
-    var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-    repo.read('master','README.md',function(err, data){    
-        
-        $READMEPage = data;        
-        
-        $READMEPage = $READMEPage.replace('[title]',$AgencyDatasetTitle);
-        $READMEPage = $READMEPage.replace('[agency name]',$AgencyName);
-        
-        repo.write('master','README.md', $READMEPage, 'Updating the README.', function(err) {
-      
-            redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
-            setTimeout(callback(redirectURL), 2000);              
-        
-          });
-       });             
+        });        
+
      
   </script> 

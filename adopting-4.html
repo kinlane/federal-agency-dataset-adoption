@@ -19,36 +19,50 @@ title: Adopt Dataset
     $Unique = getUrlVar('unique'); 
     $UserLogin = getUrlVar('account');     
     $agencyid = getUrlVar('agencyid');     
-    $oAuth_Token = getUrlVar('oAuth_Token');  
+    $oAuth_Token = getUrlVar('oAuth_Token'); 
     
+    $AgencyDatasetTitle = "";
+    $slug = "";      
     $url = "/data/" + $agencyid + ".json";
-    console.log($url);
-    
-    $Schema = {};
-    $Schema['adoption'] = 'federal-agency-dataset-adoption';
-    $Schema['agencyid'] = $agencyid;
-    $Schema['unique'] = $Unique;
-    $Schema['account'] = $UserLogin;       
-    $DataJSONEntry = JSON.stringify($Schema); 
-    
-    var github = new Github({
-        token: $oAuth_Token,
-        auth: "oauth"
-            });
-  
-    var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-    repo.write('master','adoption-entry.json', $DataJSONEntry, 'Updating the adoption-entry.json entry.', function(err) {
-        
-        $.getJSON("http://api.publicprivatesector.org/adopt/?unique="+$Unique+"&agencyid="+$agencyid+"&account="+$UserLogin,function(data) {
-                
-                //alert(data.response);
-                
-                redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-5.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                 
-                setTimeout(callback(redirectURL), 2000);              
-                         
-            });         
-        
+    $.getJSON($url, function(data) {        
+         $.each(data, function(key, val) {            
+            $thisunique = val['unique']; 
+            if($thisunique == $Unique)
+                {                    
+                $AgencyDatasetTitle = val['title'];
+                $slug = val['slug'];                 
+                }
+            });                                    
         });
+    
+    $.getJSON($url, function(data) {        
+         $.each(data, function(key, val) {           
+
+           $DataJSONEntry = JSON.stringify(val); 
+
+            $thisunique = val['unique']; 
+            if($thisunique == $Unique)
+                {
+                $thistitle = val['title'];    
+                console.log($thistitle);
+                
+                var github = new Github({
+                    token: $oAuth_Token,
+                    auth: "oauth"
+                        });
+              repo.branch(oldBranchName, newBranchName, function(err) {}); 
+                // create branch
+                var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+                repo.branch('master',$slug, function(err) {
+            
+                    redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-5.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid + "&slug=" + $slug;                                                                                 
+                    setTimeout(callback(redirectURL), 1000); 
+                    
+                    });                
+                
+                }
+            });                                    
+        });        
 
      
   </script> 
