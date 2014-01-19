@@ -64,16 +64,14 @@ title: Adopt Dataset
         repo.write($slug,'README.md', $READMEPage, 'Updating the README.', function(err) {
          
         $apiurl = "http://api.publicprivatesector.org/adopt/?agencyid="+$agencyid+"&unique="+$Unique+"&account="+$UserLogin+"&slug="+$slug;    
-        $.getJSON($apiurl,function(data,$UserLogin,$slug) {
-                    
+        $.getJSON($apiurl,function(data,$UserLogin,$slug) {                    
                 var response = data.response;
                 //$("#displayMe").append(response + "<br />");
-                
-                redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" . $slug;
-                console.log(redirectURL);
-                //setTimeout(callback(redirectURL), 500);                  
- 
                 });                 
+                
+            redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" . $slug;
+            console.log(redirectURL);
+            setTimeout(callback(redirectURL), 1000);                     
         
           });
        });             
