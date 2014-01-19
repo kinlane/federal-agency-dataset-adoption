@@ -22,6 +22,29 @@ title: Adopt Dataset
     $oAuth_Token = getUrlVar('oAuth_Token');  
     $slug = getUrlVar('slug');
     
+    $AgencyName = "";
+    $.getJSON('data/federal-agencies.json', function(data) {        
+         $.each(data['agencies'], function(key, val) {            
+            $thisagencyid = val['agency_id']; 
+            if($thisagencyid == $agencyid)
+                {                    
+                $AgencyName = val['name']; 
+                }
+            });                                    
+        });    
+    
+    $AgencyDatasetTitle = "";   
+    $url = "/data/" + $agencyid + ".json";
+    $.getJSON($url, function(data) {        
+         $.each(data, function(key, val) {            
+            $thisunique = val['unique']; 
+            if($thisunique == $Unique)
+                {                    
+                $AgencyDatasetTitle = val['title'];                
+                }
+            });                                    
+        });    
+    
     $url = "/data/" + $agencyid + ".json";
     console.log($url);
 
