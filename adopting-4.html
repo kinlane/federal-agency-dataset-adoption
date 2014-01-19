@@ -52,8 +52,9 @@ title: Adopt Dataset
                         });
                         
                 // create branch
-                var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-                repo.branch('master',$slug, function(err) {
+                console.log($slug);
+                var repo = github.getRepo($UserLogin,'adopted-federal-agency-dataset');
+                repo.branch('master',$slug,function(err) {
             
                     redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-5.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid + "&slug=" + $slug;                                                                                 
                     setTimeout(callback(redirectURL), 1000); 
