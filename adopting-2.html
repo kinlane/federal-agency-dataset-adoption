@@ -56,16 +56,11 @@ title: Adopt Dataset
           
         var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
         repo.fork(function(err) {
-        if(err)
-            {
-            redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-3.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                                                        
-            setTimeout(callback(redirectURL), 5000);
-            }
-       else
-            {
-            redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-3.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                                                        
-            setTimeout(callback(redirectURL), 5000);
-            }           
+        redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-3.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                                                        
+        setTimeout(callback(redirectURL), 5000);          
         }); 
     }); 
+    
+    redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-3.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                                                        
+    setTimeout(callback(redirectURL), 1000);
   </script> 
