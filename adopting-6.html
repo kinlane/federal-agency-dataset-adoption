@@ -63,7 +63,7 @@ title: Adopt Dataset
         
         repo.write($slug,'README.md', $READMEPage, 'Updating the README.', function(err) {
          
-        $apiurl = "http://api.gsa.apievangelist.com/utility/updateindex/?agencyid="+$agencyid+"&unique="+$Unique+"&account="+$UserLogin+"&slug="+$slug;    
+        $apiurl = "http://api.publicprivatesector.org/adopt/?agencyid="+$agencyid+"&unique="+$Unique+"&account="+$UserLogin+"&slug="+$slug;    
         $.getJSON($apiurl,function(data,$UserLogin,$slug) {
                     
                 var response = data.response;
