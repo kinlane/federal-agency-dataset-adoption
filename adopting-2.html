@@ -23,14 +23,15 @@ title: Adopt Dataset
     $url = "/data/" + $agencyid + ".json";
     console.log($url);
     
+    $slug = "";
     $.getJSON($url, function(data) {        
          $.each(data, function(key, val) {           
             
             $thisunique = val['unique']; 
             if($thisunique == $Unique)
                 {
-                $thistitle = val['title'];    
-                console.log($thistitle);
+                $slug = val['slug'];    
+                console.log($slug);
                 }
             });                                    
         });  
@@ -54,7 +55,7 @@ title: Adopt Dataset
           
             var repo = github.getRepo('kinlane', 'adopted-federal-agency-dataset');
             repo.fork(function(err) {
-                redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-3.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid;                                                                                                                        
+                redirectURL = "http://federal-agency-dataset-adoption.publicprivatesector.org/adopting-3.html?unique=" + $Unique + "&oAuth_Token=" + $oAuth_Token + "&account=" + $UserLogin + "&agencyid=" + $agencyid + "&slug=" + $slug;                                                                                                                     
                 setTimeout(callback(redirectURL), 5000);          
             });           
            
