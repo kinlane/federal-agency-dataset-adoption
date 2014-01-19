@@ -53,10 +53,7 @@ title: Adopt Dataset
     var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
     repo.read('master','README.md',function(err, data){    
         
-        $READMEPage = data;        
-        
-        $READMEPage = $READMEPage.replace('[title]',$AgencyDatasetTitle);
-        $READMEPage = $READMEPage.replace('[agency name]',$AgencyName);
+        $READMEPage = data;  
         
         repo.write('master','README.md', $READMEPage, 'Updating the README.', function(err) {
       
