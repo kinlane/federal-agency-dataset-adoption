@@ -21,7 +21,7 @@ title: Adopt Dataset
     $thistitle = $agencyid + " Datasset";  
     
     $url = "/data/" + $agencyid + ".json";
-    console.log($url);
+    //console.log($url);
     
     $slug = "";
     $.getJSON($url, function(data) {        
@@ -40,7 +40,7 @@ title: Adopt Dataset
     OAuth.callback('github', function(err, result) {
 
         $oAuth_Token = result.access_token;
-        console.log($oAuth_Token); 
+        //console.log($oAuth_Token); 
         
         var github = new Github({
             token: $oAuth_Token,

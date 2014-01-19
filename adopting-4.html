@@ -44,7 +44,7 @@ title: Adopt Dataset
             if($thisunique == $Unique)
                 {
                 $thistitle = val['title'];    
-                console.log($thistitle);
+                //console.log($thistitle);
                 
                 var github = new Github({
                     token: $oAuth_Token,
@@ -52,7 +52,7 @@ title: Adopt Dataset
                         });
                         
                 // create branch
-                console.log($slug);
+                //console.log($slug);
                 var repo = github.getRepo($UserLogin,'adopted-federal-agency-dataset');
                 repo.branch('master',$slug,function(err) {
             

@@ -23,7 +23,7 @@ title: Adopt Dataset
     $slug = getUrlVar('slug');  
     
     $url = "/data/" + $agencyid + ".json";
-    console.log($url);
+    //console.log($url);
     
     $.getJSON($url, function(data) {        
          $.each(data, function(key, val) {           
@@ -34,7 +34,7 @@ title: Adopt Dataset
             if($thisunique == $Unique)
                 {
                 $thistitle = val['title'];    
-                console.log($thistitle);
+                //console.log($thistitle);
                 
                 var github = new Github({
                     token: $oAuth_Token,
