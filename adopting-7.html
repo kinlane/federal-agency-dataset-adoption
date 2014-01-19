@@ -35,19 +35,14 @@ title: Adopt Dataset
             //$("#displayMe").append(response + "<br />");
             
             var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-            
-            repo.remove('master','README2.md', function(err) {
+
+            repo.remove($slug,'README2.md', function(err) {
                 
-                repo.remove($slug,'README2.md', function(err) {
-                    
-                    redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" + $slug;
-                    //console.log($slug);
-                    setTimeout(callback(redirectURL), 1000);                      
-                    
-                    });                    
+                redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" + $slug;
+                //console.log($slug);
+                setTimeout(callback(redirectURL), 1000);                      
                 
-                });                 
-                
+                });                    
             });                 
         });           
      
