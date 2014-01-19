@@ -69,7 +69,7 @@ title: Adopt Dataset
                 repo.remove($slug,'README2.md', function(err) {
                  
                 $apiurl = "http://api.gsa.apievangelist.com/utility/updateindex/?agencyid="+$agencyid+"&unique="+$Unique+"&account="+$UserLogin+"&slug="+$slug;    
-                $.getJSON($apiurl,function(data) {
+                $.getJSON($apiurl,function(data,$UserLogin,$slug) {
                             
                         var response = data.response;
                         //$("#displayMe").append(response + "<br />");
