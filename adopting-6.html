@@ -21,35 +21,15 @@ title: Adopt Dataset
     $agencyid = getUrlVar('agencyid');     
     $oAuth_Token = getUrlVar('oAuth_Token');  
     $slug = getUrlVar('slug');
-        
-    $AgencyName = "";
-    $.getJSON('data/federal-agencies.json', function(data) {        
-         $.each(data['agencies'], function(key, val) {            
-            $thisagencyid = val['agency_id']; 
-            if($thisagencyid == $agencyid)
-                {                    
-                $AgencyName = val['name']; 
-                }
-            });                                    
-        });    
     
-    $AgencyDatasetTitle = "";   
     $url = "/data/" + $agencyid + ".json";
-    $.getJSON($url, function(data) {        
-         $.each(data, function(key, val) {            
-            $thisunique = val['unique']; 
-            if($thisunique == $Unique)
-                {                    
-                $AgencyDatasetTitle = val['title'];                
-                }
-            });                                    
-        });
-    
+    console.log($url);
+
     var github = new Github({
         token: $oAuth_Token,
         auth: "oauth"
             });
-            
+  
     var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
     repo.read('master','README2.md',function(err, data){    
         
@@ -67,13 +47,22 @@ title: Adopt Dataset
         $.getJSON($apiurl,function(data) {                    
                 var response = data.response;
                 //$("#displayMe").append(response + "<br />");
+                
+                repo.remove('master','README2.md', function(err) {
                     
-                redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" + $slug;
-                //console.log($slug);
-                setTimeout(callback(redirectURL), 1000);                   
+                    repo.remove($slug,'README2.md', function(err) {
+                        
+                        redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" + $slug;
+                        //console.log($slug);
+                        setTimeout(callback(redirectURL), 1000);                      
+                        
+                        });                    
+                    
+                    });                 
                     
                 });                 
             });
-       });             
+       });  
+
      
   </script> 
