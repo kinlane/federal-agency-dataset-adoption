@@ -21,49 +21,27 @@ title: Adopt Dataset
     $agencyid = getUrlVar('agencyid');     
     $oAuth_Token = getUrlVar('oAuth_Token');  
     $slug = getUrlVar('slug');
-        
-    $AgencyName = "";
-    $.getJSON('data/federal-agencies.json', function(data) {        
-         $.each(data['agencies'], function(key, val) {            
-            $thisagencyid = val['agency_id']; 
-            if($thisagencyid == $agencyid)
-                {                    
-                $AgencyName = val['name']; 
-                }
-            });                                    
-        });    
-    
-    $AgencyDatasetTitle = "";   
-    $url = "/data/" + $agencyid + ".json";
-    $.getJSON($url, function(data) {        
-         $.each(data, function(key, val) {            
-            $thisunique = val['unique']; 
-            if($thisunique == $Unique)
-                {                    
-                $AgencyDatasetTitle = val['title'];                
-                }
-            });                                    
-        });
+
     
     var github = new Github({
         token: $oAuth_Token,
         auth: "oauth"
             });
             
-    var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
-    repo.read('master','README.md',function(err, data){    
+    $apiurl = "http://api.publicprivatesector.org/adopt/?agencyid="+$agencyid+"&unique="+$Unique+"&account="+$UserLogin+"&slug="+$slug;    
+    $.getJSON($apiurl,function(data) {  
+                          
+        var response = data.response;
+        //$("#displayMe").append(response + "<br />");
         
-        $READMEPage = data;        
-        
-        $READMEPage = $READMEPage.replace('[title]',$AgencyDatasetTitle);
-        $READMEPage = $READMEPage.replace('[agency name]',$AgencyName);
-        
-        repo.write($slug,'README.md', $READMEPage, 'Updating the README.', function(err) {
-      
-            redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset";
-            setTimeout(callback(redirectURL), 1000);              
-        
-          });
-       });             
+        var repo = github.getRepo($UserLogin, 'adopted-federal-agency-dataset');
+        repo.remove($slug,'README2.md', function(err) {
+            
+            redirectURL = "https://github.com/" + $UserLogin + "/adopted-federal-agency-dataset/tree/" + $slug;
+            //console.log($slug);
+            setTimeout(callback(redirectURL), 1000);                      
+            
+            });                                   
+        });           
      
   </script> 
